@@ -1,7 +1,7 @@
 import math
 from PIL import Image, ImageFont, ImageDraw
 
-from skitso.atom import BaseImgElem, Point
+from skitso.atom import BaseImgElem, Container, Point
 
 
 class Rectangle(BaseImgElem):
@@ -36,11 +36,8 @@ class Rectangle(BaseImgElem):
     def y(self):
         return self.position.y
 
-    def x1y1x2y2(self, relative_to=None):
+    def x1y1x2y2(self):
         pfrom, pto = self.position, self.end
-        if relative_to is not None:
-            pfrom += relative_to
-            pto += relative_to
         return pfrom.x, pfrom.y, pto.x, pto.y
 
     def _draw_kw(self):
@@ -51,9 +48,9 @@ class Rectangle(BaseImgElem):
             kw["outline"] = self.stroke_color
         return kw
 
-    def draw_me(self, pencil, relative_to=None):
+    def draw_me(self, pencil):
         kw = self._draw_kw()
-        pencil.rectangle(self.x1y1x2y2(relative_to), **kw)
+        pencil.rectangle(self.x1y1x2y2(), **kw)
 
 
 class RoundedRectangle(Rectangle):
@@ -79,9 +76,9 @@ class RoundedRectangle(Rectangle):
         kw["radius"] = self.corner_radius
         return kw
 
-    def draw_me(self, pencil, relative_to=None):
+    def draw_me(self, pencil):
         kw = self._draw_kw()
-        pencil.rounded_rectangle(self.x1y1x2y2(relative_to), **kw)
+        pencil.rounded_rectangle(self.x1y1x2y2(), **kw)
 
 
 class Line(BaseImgElem):
@@ -100,10 +97,8 @@ class Line(BaseImgElem):
     def end(self):
         return self.position + self.relative_end
 
-    def draw_me(self, pencil, relative_to=None):
+    def draw_me(self, pencil):
         shift = self.position
-        if relative_to is not None:
-            shift += relative_to
         x1, y1 = shift + self.line_from
         x2, y2 = shift + self.line_to
         pencil.line((x1, y1, x2, y2), fill=self.color, width=self.thickness)
@@ -145,10 +140,8 @@ class ArrowTip(BaseImgElem):
     def end(self):
         return self.position + self.relative_end
 
-    def draw_me(self, pencil, relative_to=None):
+    def draw_me(self, pencil):
         shift = self.position
-        if relative_to is not None:
-            shift += relative_to
         positioned_triangle = [vtx + shift for vtx in self.relative_vertices]
         raw = [(vtx.x, vtx.y) for vtx in positioned_triangle]
         pencil.polygon(raw, fill=self.color)
@@ -213,45 +206,26 @@ class Arrow(BaseImgElem):
     def thickness(self):
         return self.line.thickness
 
-    def draw_me(self, pencil, relative_to=None):
-        self.tip.draw_me(pencil, relative_to)
+    def draw_me(self, pencil):
+        self.tip.draw_me(pencil)
         if self.truncated_line is not None:
-            self.truncated_line.draw_me(pencil, relative_to)
+            self.truncated_line.draw_me(pencil)
         else:
-            self.line.draw_me(pencil, relative_to)
+            self.line.draw_me(pencil)
 
 
-class DeadArrow(BaseImgElem):
+class DeadArrow(Container):
     def __init__(self, x, y, length, tip_height, color, thickness):
-        super().__init__(Point(x, y))
-        self.position = Point(x, y)
-        self.relative_end = Point(length, length)
         self.color = color
         self.thickness = thickness
-
-        sx, sy = self.position
-        bx, by = x + length, y
-        ex, ey = x + length, y + length
-        self.line = Line(sx, sy, bx, by, color, thickness)
-        self.arrow = Arrow(bx, by, ex, ey, color, thickness, tip_height)
-        self.arrow_delta = self.arrow.position - self.position
-
-    @property
-    def position(self):
-        return self.line.position
-
-    @position.setter
-    def position(self, value):
-        self.line.position = value
-        self.arrow.position = self.arrow_delta + value
-
-    @property
-    def end(self):
-        return self.position + self.relative_end
-
-    def draw_me(self, pencil, relative_to=None):
-        self.arrow.draw_me(pencil, relative_to)
-        self.line.draw_me(pencil, relative_to)
+        position = Point(x, y)
+        elbow = Point(x + length, y)
+        end = Point(x + length, y + length)
+        self.line = Line(x, y, elbow.x, elbow.y, color, thickness)
+        self.arrow = Arrow(elbow.x, elbow.y, end.x, end.y, color, thickness, tip_height)
+        super().__init__(position)
+        self.add(self.line)
+        self.add(self.arrow)
 
 
 class Text(BaseImgElem):
@@ -269,10 +243,6 @@ class Text(BaseImgElem):
 
     def load_font(self):
         return ImageFont.load_default(self.font_size)
-        if self.font_name is None:
-            return ImageFont.load_default(self.font_size)
-        else:
-            return ImageFont.truetype(self.font_name, self.font_size)
 
     @property
     def end(self):
@@ -283,10 +253,7 @@ class Text(BaseImgElem):
             self.relative_end = Point(box[2], box[3])
         return self.position + self.relative_end
 
-    def draw_me(self, pencil, relative_to=None):
+    def draw_me(self, pencil):
         font = self.load_font()
-        if relative_to is not None:
-            x, y = self.position + relative_to
-        else:
-            x, y = self.position
+        x, y = self.position
         pencil.text((x, y), self.text, font=font, fill=self.color, align=self.align)

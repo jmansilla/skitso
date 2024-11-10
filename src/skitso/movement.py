@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from enum import Enum
 
 
 @dataclass
@@ -56,9 +57,6 @@ LEFT = Vector(-1, 0)
 RIGHT = Vector(1, 0)
 UP = Vector(0, -1)
 DOWN = Vector(0, 1)
-
-
-from enum import Enum
 
 
 class AlignmentDial(Enum):

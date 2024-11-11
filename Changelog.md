@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - yyyy-mm-dd
 
-
 ### Added
 
   - Pencil has image attribute to enable pasting images
+  - Antialising disabled by default (configurable to scene objects)
 
 ### Changed
 
@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
   - DeadArrow working properly. Now inherits from Container.
   - Removed dead code (DIRECT attr)
+  - Scenes located at 0,0
 
 ## [0.1.0] - 2024-11-10
 

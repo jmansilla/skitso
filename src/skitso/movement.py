@@ -95,7 +95,7 @@ class Movable:
 
     @property
     def end(self):
-        raise NotImplementedError
+        raise NotImplementedError('Not implemented "end" for %s' % self.__class__.__name__)
 
     @property
     def box_height(self):

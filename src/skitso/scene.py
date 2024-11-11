@@ -1,12 +1,13 @@
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-from skitso.atom import Container
+from skitso.atom import Container, Point
 
 
 class Scene(Container):
 
-    def __init__(self, canvas_size, base_folder_path, color="black"):
+    def __init__(self, canvas_size, base_folder_path, color="black", antialias=False):
+        self.position = Point(0, 0)
         self.color = color
         self.width, self.height = canvas_size
         self.create_canvas()
@@ -16,11 +17,12 @@ class Scene(Container):
         self.folder_path.mkdir(parents=True, exist_ok=True)
         self.next_tick_id = 1
         self.children = []
+        self.antialias = antialias
 
     def create_canvas(self):
         self.image = Image.new("RGB", (self.width, self.height), self.color)
         self.draw = ImageDraw.Draw(self.image)
-        self.draw.image = self.image
+        self.draw.image = self.image  # type: ignore
         self.draw.fontmode = "L"
 
     def tick(self):
@@ -30,10 +32,14 @@ class Scene(Container):
             item.draw_me(self.draw)
 
         new_img_path = self.folder_path / f"{self.next_tick_id:08}.jpg"
-        im = self.image.resize(
-            (self.width * 2, self.height * 2), resample=Image.Resampling.LANCZOS
-        )
-        im = im.resize((self.width, self.height), resample=Image.Resampling.LANCZOS)
+        if self.antialias:
+            # only known way to get antialiasing: resize up and down.
+            im = self.image.resize(
+                (self.width * 2, self.height * 2), resample=Image.Resampling.LANCZOS
+            )
+            im = im.resize((self.width, self.height), resample=Image.Resampling.LANCZOS)
+        else:
+            im = self.image
         im.save(new_img_path, subsampling=0, quality=95)
         self.next_tick_id += 1
 

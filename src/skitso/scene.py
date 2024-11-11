@@ -21,6 +21,7 @@ class Scene(Container):
     def create_canvas(self):
         self.image = Image.new("RGB", (self.width, self.height), self.color)
         self.draw = ImageDraw.Draw(self.image)
+        self.draw.image = self.image
         self.draw.fontmode = "L"
 
     def tick(self):

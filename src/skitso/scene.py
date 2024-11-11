@@ -5,7 +5,6 @@ from skitso.atom import Container
 
 
 class Scene(Container):
-    DIRECT = False
 
     def __init__(self, canvas_size, base_folder_path, color="black"):
         self.color = color
@@ -25,11 +24,11 @@ class Scene(Container):
         self.draw.fontmode = "L"
 
     def tick(self):
-        if not self.DIRECT:
-            # need to create the image from scratch
-            self.create_canvas()
-            for item in self.children:
-                item.draw_me(self.draw)
+        # need to create the image from scratch
+        self.create_canvas()
+        for item in self.children:
+            item.draw_me(self.draw)
+
         new_img_path = self.folder_path / f"{self.next_tick_id:08}.jpg"
         im = self.image.resize(
             (self.width * 2, self.height * 2), resample=Image.Resampling.LANCZOS
@@ -39,7 +38,4 @@ class Scene(Container):
         self.next_tick_id += 1
 
     def add(self, item):
-        if self.DIRECT:
-            item.draw_me(self.draw)
-        else:
-            self.children.append(item)
+        self.children.append(item)

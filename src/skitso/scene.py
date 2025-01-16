@@ -7,7 +7,7 @@ from skitso.atom import Container, Point
 class Scene(Container):
 
     def __init__(self, canvas_size, base_folder_path, color="black", antialias=False):
-        self.position = Point(0, 0)
+        super().__init__(position=Point(0, 0))
         self.color = color
         self.width, self.height = canvas_size
         self.create_canvas()

@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
+### Changed
+
+### Fixed
+
+## [0.1.2] - 2025-01-16
+
+### Added
+
   - Pencil has image attribute to enable pasting images
   - Antialising disabled by default (configurable to scene objects)
 

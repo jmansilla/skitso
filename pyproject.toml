@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "skitso"
-version = "0.1.1"
+version = "0.1.2"
 description = "Ligth Weigth Sketching Tool"
 authors = ["Javier Mansilla <javimansilla@gmail.com>"]
 license = "MIT"

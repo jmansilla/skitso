@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+## [0.1.3] - 2025-02-13
+
+### Changed
+
+  - Allowing pillow version from 10.4 and above (instead of starting at 11.0)
+
 ## [0.1.2] - 2025-01-16
 
 ### Added

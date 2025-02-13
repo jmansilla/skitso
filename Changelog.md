@@ -12,11 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-## [0.1.3] - 2025-02-13
+## [0.1.4] - 2025-02-13
 
 ### Changed
 
   - Allowing pillow version from 10.4 and above (instead of starting at 11.0)
+  - Scene folder path easier to customize
 
 ## [0.1.2] - 2025-01-16
 

@@ -11,13 +11,16 @@ class Scene(Container):
         self.color = color
         self.width, self.height = canvas_size
         self.create_canvas()
+        self.build_folder(base_folder_path)
+        self.next_tick_id = 1
+        self.children = []
+        self.antialias = antialias
+
+    def build_folder(self, base_folder_path):
         self.folder_path = (
             Path(base_folder_path) / type(self).__name__.lower() / "frames"
         )
         self.folder_path.mkdir(parents=True, exist_ok=True)
-        self.next_tick_id = 1
-        self.children = []
-        self.antialias = antialias
 
     def create_canvas(self):
         self.image = Image.new("RGB", (self.width, self.height), self.color)

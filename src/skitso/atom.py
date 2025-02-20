@@ -1,3 +1,4 @@
+from collections import defaultdict
 from skitso.movement import Movable, Point, Vector
 
 
@@ -53,7 +54,22 @@ class Container(BaseImgElem):
             for child in self.children:
                 child.position += delta
 
+    def iter_children(self, by_z_index=True):
+        if not by_z_index:
+            for child in self.children:
+                yield child
+        else:
+            by_z = defaultdict(list)
+            for child in self.children:
+                z = getattr(child, 'z_index', 0)
+                by_z[z].append(child)
+            if len(by_z) > 1:
+                print('Z', self, by_z)
+            for z in sorted(by_z.keys()):
+                for child in by_z[z]:
+                    yield child
+
     def draw_me(self, pencil):
         # we are a container, so we need to draw all the children
-        for child in self.children:
+        for child in self.iter_children():
             child.draw_me(pencil)

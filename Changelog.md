@@ -12,6 +12,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+## [0.1.5] - 2025-02-20
+
+### Added
+
+  - If children of container have z_index attribute, its used for drawing in such order
+
+### Changed
+
+### Fixed
+  - Deduplicated code from Scene and Container
+
 ## [0.1.4] - 2025-02-13
 
 ### Changed

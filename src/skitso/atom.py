@@ -63,8 +63,6 @@ class Container(BaseImgElem):
             for child in self.children:
                 z = getattr(child, 'z_index', 0)
                 by_z[z].append(child)
-            if len(by_z) > 1:
-                print('Z', self, by_z)
             for z in sorted(by_z.keys()):
                 for child in by_z[z]:
                     yield child

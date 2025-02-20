@@ -30,7 +30,7 @@ class Scene(Container):
     def tick(self):
         # need to create the image from scratch
         self.create_canvas()
-        for item in self.children:
+        for item in self.iter_children():
             item.draw_me(self.draw)
 
         new_img_path = self.folder_path / f"{self.next_tick_id:08}.jpg"

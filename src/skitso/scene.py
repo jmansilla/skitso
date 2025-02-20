@@ -13,7 +13,6 @@ class Scene(Container):
         self.create_canvas()
         self.build_folder(base_folder_path)
         self.next_tick_id = 1
-        self.children = []
         self.antialias = antialias
 
     def build_folder(self, base_folder_path):
@@ -45,6 +44,3 @@ class Scene(Container):
             im = self.image
         im.save(new_img_path, subsampling=0, quality=95)
         self.next_tick_id += 1
-
-    def add(self, item):
-        self.children.append(item)

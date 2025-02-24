@@ -214,20 +214,6 @@ class Arrow(BaseImgElem):
             self.line.draw_me(pencil)
 
 
-class DeadArrow(Container):
-    def __init__(self, x, y, length, tip_height, color, thickness):
-        self.color = color
-        self.thickness = thickness
-        position = Point(x, y)
-        elbow = Point(x + length, y)
-        end = Point(x + length, y + length)
-        self.line = Line(x, y, elbow.x, elbow.y, color, thickness)
-        self.arrow = Arrow(elbow.x, elbow.y, end.x, end.y, color, thickness, tip_height)
-        super().__init__(position)
-        self.add(self.line)
-        self.add(self.arrow)
-
-
 class Text(BaseImgElem):
     def __init__(
         self, x, y, text, font_name, font_size, color="white", align="left", bold=False

@@ -3,6 +3,7 @@ from skitso.movement import Movable, Point, Vector
 
 
 class BaseImgElem(Movable):
+    z_index = 0
 
     def draw_me(self, pencil, relative_to=None):
         raise NotImplementedError

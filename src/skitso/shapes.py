@@ -216,13 +216,12 @@ class Arrow(BaseImgElem):
 
 class Text(BaseImgElem):
     def __init__(
-        self, x, y, text, font_name, font_size, color="white", align="left", bold=False
+        self, x, y, text, font_name, font_size, color="white", align="left"
     ):
         super().__init__(Point(x, y))
         self.text = text
         self.font_name = font_name
         self.font_size = font_size
-        self.bold = bold
         self.color = color
         self.align = align
         self.font = self.load_font()
@@ -239,7 +238,10 @@ class Text(BaseImgElem):
             self.relative_end = Point(box[2], box[3])
         return self.position + self.relative_end
 
+    def get_params(self):
+        return {"stroke_fill": None, "stroke_width": 0, "fill": self.color, "align": self.align}
+
     def draw_me(self, pencil):
         font = self.load_font()
         x, y = self.position
-        pencil.text((x, y), self.text, font=font, fill=self.color, align=self.align)
+        pencil.text((x, y), self.text, font=font, **self.get_params())

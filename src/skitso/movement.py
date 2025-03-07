@@ -73,6 +73,21 @@ class Aligment:
     def __eq__(self, value: object) -> bool:
         return isinstance(value, Aligment) and self.horizontal == value.horizontal and self.vertical == value.vertical
 
+    def __repr__(self):
+        if self == TOP_EDGE:
+            return "Aligment.TOP_EDGE"
+        elif self == BOTTOM_EDGE:
+            return "Aligment.BOTTOM_EDGE"
+        elif self == CENTER_CENTER:
+            return "Aligment.CENTER_CENTER"
+        elif self == LEFT_EDGE:
+            return "Aligment.LEFT_EDGE"
+        elif self == RIGHT_EDGE:
+            return "Aligment.RIGHT_EDGE"
+        else:
+            return f"Aligment(horizontal={self.horizontal}, vertical={self.vertical})"
+
+
 TOP_EDGE = Aligment(None, AlignmentDial.LOW)
 BOTTOM_EDGE = Aligment(None, AlignmentDial.HIGH)
 CENTER_CENTER = Aligment(AlignmentDial.HALF, AlignmentDial.HALF)

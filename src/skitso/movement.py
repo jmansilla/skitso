@@ -155,7 +155,7 @@ class Movable:
         elif alignment.vertical == AlignmentDial.LOW:  # top edge
             new_y = other.position.y
         elif alignment.vertical == AlignmentDial.HIGH:  # bottom edge
-            new_y = other.end.y - current_end.y
+            new_y = other.end.y - (current_end.y - self.position.y)
         else:  # vertical center
             other_delta_y = other.end.y - other.position.y
             self_delta_y = current_end.y - self.position.y
@@ -166,7 +166,7 @@ class Movable:
         elif alignment.horizontal == AlignmentDial.LOW:  # left edge
             new_x = other.position.x
         elif alignment.horizontal == AlignmentDial.HIGH:  # right edge
-            new_x = other.end.x - current_end.x
+            new_x = other.end.x - (current_end.x - self.position.x)
         else:  # horizontal center
             other_delta_x = other.end.x - other.position.x
             self_delta_x = current_end.x - self.position.x

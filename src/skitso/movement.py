@@ -70,6 +70,8 @@ class Aligment:
         self.horizontal = horizontal
         self.vertical = vertical
 
+    def __eq__(self, value: object) -> bool:
+        return isinstance(value, Aligment) and self.horizontal == value.horizontal and self.vertical == value.vertical
 
 TOP_EDGE = Aligment(None, AlignmentDial.LOW)
 BOTTOM_EDGE = Aligment(None, AlignmentDial.HIGH)

@@ -46,9 +46,9 @@ if __name__ == "__main__":
 That will create the 3 following frames
 
 <div>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/01.png?raw=true" alt="Frame 01" width="250"/>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/02.png?raw=true" alt="Frame 02" width="250"/>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/03.png?raw=true" alt="Frame 03" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/01.jpg?raw=true" alt="Frame 01" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/02.jpg?raw=true" alt="Frame 02" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/03.jpg?raw=true" alt="Frame 03" width="250"/>
 </div>
 
 
@@ -101,9 +101,9 @@ class MazeScene(Scene):
 
 The frames generated in this case are the ones that follow. Take a look of how each named-rectangle falls down between each frame.
 <div>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/04.png?raw=true" alt="Frame 04" width="250"/>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/05.png?raw=true" alt="Frame 05" width="250"/>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/06.png?raw=true" alt="Frame 06" width="250"/>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/07.png?raw=true" alt="Frame 07" width="250"/>
-<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/08.png?raw=true" alt="Frame 08" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/04.jpg?raw=true" alt="Frame 04" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/05.jpg?raw=true" alt="Frame 05" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/06.jpg?raw=true" alt="Frame 06" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/07.jpg?raw=true" alt="Frame 07" width="250"/>
+<img style="float:left" src="https://github.com/jmansilla/skitso/blob/main/images/08.jpg?raw=true" alt="Frame 08" width="250"/>
 </div>

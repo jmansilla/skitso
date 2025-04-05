@@ -44,5 +44,5 @@ class Scene(Container):
             im = im.resize((self.width, self.height), resample=Image.Resampling.LANCZOS)
         else:
             im = self.image
-        im.save(new_img_path, subsampling=0, quality=95, format=ext)
+        im.save(new_img_path, subsampling=0, quality=95)
         self.next_tick_id += 1

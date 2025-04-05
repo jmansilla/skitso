@@ -6,7 +6,8 @@ from skitso.atom import Container, Point
 
 class Scene(Container):
 
-    def __init__(self, canvas_size, base_folder_path, color="black", antialias=False):
+    def __init__(self, canvas_size, base_folder_path, color="black", antialias=False,
+                 file_extension="jpg"):
         super().__init__(position=Point(0, 0))
         self.color = color
         self.width, self.height = canvas_size
@@ -14,6 +15,7 @@ class Scene(Container):
         self.build_folder(base_folder_path)
         self.next_tick_id = 1
         self.antialias = antialias
+        self.file_extension = file_extension
 
     def build_folder(self, base_folder_path):
         self.folder_path = (
@@ -32,8 +34,8 @@ class Scene(Container):
         self.create_canvas()
         for item in self.iter_children():
             item.draw_me(self.draw)
-
-        new_img_path = self.folder_path / f"{self.next_tick_id:08}.jpg"
+        ext = self.file_extension
+        new_img_path = self.folder_path / f"{self.next_tick_id:08}.{ext}"
         if self.antialias:
             # only known way to get antialiasing: resize up and down.
             im = self.image.resize(
@@ -42,5 +44,5 @@ class Scene(Container):
             im = im.resize((self.width, self.height), resample=Image.Resampling.LANCZOS)
         else:
             im = self.image
-        im.save(new_img_path, subsampling=0, quality=95)
+        im.save(new_img_path, subsampling=0, quality=95, format=ext)
         self.next_tick_id += 1

@@ -9,7 +9,7 @@ Built on top of [Pillow](https://pypi.org/project/pillow/), skitso it's a lightw
 
         It's way smaller, and it's somehow related.
 
-With very simple shape primitives you can define your scene, and them you explicitely take snapshots of the frames you want to capture.
+With very simple shape primitives you can define your scene, and then you explicitely take snapshots of the frames you want to capture.
 That's it.
 
 
